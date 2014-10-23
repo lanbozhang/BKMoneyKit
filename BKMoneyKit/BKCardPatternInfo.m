@@ -16,6 +16,7 @@
 @property (nonatomic, strong) NSArray               *numberGrouping;
 @property (nonatomic, strong) NSArray               *lengths;
 @property (nonatomic) NSInteger                     maxLength;
+@property (nonatomic) BOOL      invalid;
 
 @end
 
@@ -34,6 +35,7 @@
         NSInteger maxLength;
         self.lengths = [[self class] numberArrayWithCommaSeparatedString:aDictionary[@"length"] maxValue:&maxLength];
         self.maxLength = maxLength;
+        self.invalid = [aDictionary[@"invalid"] boolValue];
     }
     return self;
 }

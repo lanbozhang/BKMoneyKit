@@ -12,7 +12,7 @@
 
 @interface BKCardNumberFormatter ()
 
-@property (nonatomic, strong) NSSet                 *cardPatterns;
+@property (nonatomic, strong) NSArray                 *cardPatterns;
 @property (nonatomic, strong) NSRegularExpression   *nonNumericRegularExpression;
 
 @property (nonatomic, strong) NSString              *cachedPrefix;
@@ -39,7 +39,7 @@
             }
         }
         
-        self.cardPatterns = [NSSet setWithArray:mutableArray];
+        self.cardPatterns = [NSArray arrayWithArray:mutableArray];
         self.nonNumericRegularExpression = [BKMoneyUtils nonNumericRegularExpression];
         self.groupSeparater = @" ";
     }
@@ -93,7 +93,8 @@
 
 - (BKCardPatternInfo *)cardPatternInfoWithNumberString:(NSString *)aNumberString
 {
-    if (self.cachedPrefix && [aNumberString hasPrefix:self.cachedPrefix] && self.cardPatternInfo) {
+    if (self.cachedPrefix && [aNumberString hasPrefix:self.cachedPrefix] && self.cardPatternInfo
+        && !self.cardPatternInfo.invalid) {
         return self.cardPatternInfo;
     }
     

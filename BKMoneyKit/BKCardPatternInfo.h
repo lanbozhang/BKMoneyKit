@@ -20,6 +20,8 @@
  */
 @property (nonatomic, strong, readonly) NSString      *shortName;
 
+@property (nonatomic, readonly) BOOL      invalid;
+
 /**
  * 
  */

@@ -110,5 +110,19 @@
 		<key>length</key>
 		<string>16</string>
 	</dict>
+	<dict>
+		<key>pattern</key>
+		<string>\d</string>
+		<key>companyName</key>
+		<string>invalid</string>
+		<key>shortName</key>
+		<string>invalid</string>
+		<key>numberGrouping</key>
+		<string>4,4,4,4,4</string>
+		<key>length</key>
+		<string>20</string>
+		<key>invalid</key>
+		<true/>
+	</dict>
 </array>
 </plist>
