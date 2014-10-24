@@ -30,7 +30,7 @@
     _numberCharacterSet = [BKMoneyUtils numberCharacterSet];
     
     self.keyboardType = UIKeyboardTypeNumberPad;
-    self.clearButtonMode = UITextFieldViewModeAlways;
+    self.clearButtonMode = UITextFieldViewModeWhileEditing;
     
     [self addTarget:self action:@selector(textFieldEditingChanged:) forControlEvents:UIControlEventEditingChanged];
 }
@@ -126,7 +126,7 @@
             
             UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 44.f, size)];
             imageView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-            imageView.contentMode = UIViewContentModeCenter;
+            imageView.contentMode = UIViewContentModeLeft;
             
             self.leftView = imageView;
             self.leftViewMode = UITextFieldViewModeAlways;

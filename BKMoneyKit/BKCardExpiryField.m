@@ -24,7 +24,7 @@
     
     self.placeholder = @"MM / YY";
     self.keyboardType = UIKeyboardTypeNumberPad;
-    self.clearButtonMode = UITextFieldViewModeAlways;
+    self.clearButtonMode = UITextFieldViewModeWhileEditing;
     
     _numberCharacterSet = [BKMoneyUtils numberCharacterSet];
     _nonNumericRegularExpression = [BKMoneyUtils nonNumericRegularExpression];
