@@ -16,6 +16,7 @@
 @property (nonatomic, strong) NSArray               *numberGrouping;
 @property (nonatomic, strong) NSArray               *lengths;
 @property (nonatomic) NSInteger                     maxLength;
+@property (nonatomic, readwrite) NSInteger                     minLength;
 @property (nonatomic) BOOL      invalid;
 
 @end
@@ -30,34 +31,41 @@
         self.patternRegularExpression = [[NSRegularExpression alloc] initWithPattern:pattern options:0 error:nil];
         self.companyName = aDictionary[@"companyName"];
         self.shortName = aDictionary[@"shortName"];
-        self.numberGrouping = [[self class] numberArrayWithCommaSeparatedString:aDictionary[@"numberGrouping"] maxValue:NULL];
+        self.numberGrouping = [[self class] numberArrayWithCommaSeparatedString:aDictionary[@"numberGrouping"] maxValue:NULL minalue:NULL];
         
-        NSInteger maxLength;
-        self.lengths = [[self class] numberArrayWithCommaSeparatedString:aDictionary[@"length"] maxValue:&maxLength];
+        NSInteger maxLength, minLength;
+        self.lengths = [[self class] numberArrayWithCommaSeparatedString:aDictionary[@"length"] maxValue:&maxLength minalue:&minLength];
         self.maxLength = maxLength;
+        self.minLength = minLength;
         self.invalid = [aDictionary[@"invalid"] boolValue];
     }
     return self;
 }
 
-+ (NSArray *)numberArrayWithCommaSeparatedString:(NSString *)aCommaSeparatedString maxValue:(NSInteger *)outMaxValue
++ (NSArray *)numberArrayWithCommaSeparatedString:(NSString *)aCommaSeparatedString maxValue:(NSInteger *)outMaxValue minalue:(NSInteger*)outMinValue
 {
     NSArray *components = [aCommaSeparatedString componentsSeparatedByString:@","];
     
     NSMutableArray *mutableResultArray = [NSMutableArray arrayWithCapacity:components.count];
     
     NSInteger maxValue = 0;
-    
+    NSInteger minValue = NSIntegerMax;
+
     for (NSString *component in components) {
         NSInteger integer = component.integerValue;
         if (integer > 0) {
             [mutableResultArray addObject:@(integer)];
             maxValue = MAX(maxValue, integer);
+            minValue = MIN(minValue, integer);
         }
     }
     
     if (outMaxValue) {
         *outMaxValue = maxValue;
+    }
+    
+    if (outMinValue) {
+        *outMinValue = minValue;
     }
     
     return [NSArray arrayWithArray:mutableResultArray];

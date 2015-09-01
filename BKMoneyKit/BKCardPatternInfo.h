@@ -27,6 +27,9 @@
  */
 @property (nonatomic, readonly) NSInteger numberOfGroups;
 
+@property (nonatomic, readonly) NSInteger                     minLength;
+
+
 /**
  * Initialize card pattern info with dictionary object in CardPatterns.plist
  */
